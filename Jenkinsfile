@@ -23,7 +23,7 @@ pipeline {
         stage('Test') {
             steps {
                 echo 'Test stage'
-                ls build/ | grep index.html
+                find -name "index.html"
             }
         }
     }
