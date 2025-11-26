@@ -23,7 +23,7 @@ pipeline {
             steps {
                 echo 'Test stage'
                 sh '''
-                    find -name "build/index.html"
+                    test -f build/index.html
                     npm test
                 '''
             }
