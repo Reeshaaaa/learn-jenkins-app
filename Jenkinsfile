@@ -1,12 +1,11 @@
 pipeline {
-    /*
     agent {
         docker {
             image 'node:18-alpine'
+            image 'mcr.microsoft.com/playwright:v1.57.0-noble'
             reuseNode true
         }
     }
-    */
     stages {
     /*
         stage('Build') {
@@ -23,13 +22,6 @@ pipeline {
         }
     */
         stage('Test') {
-            agent {
-                docker {
-                    image 'node:18-alpine'
-                    reuseNode true
-                }
-            }
-
             steps {
                 echo 'Test stage'
                 sh '''
@@ -40,12 +32,6 @@ pipeline {
         }
 
         stage('E2E') {
-            agent {
-                docker {
-                    image 'mcr.microsoft.com/playwright:v1.57.0-noble'
-                }
-            }
-
             steps {
                 echo 'Test stage'
                 sh '''
