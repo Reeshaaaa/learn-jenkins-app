@@ -20,7 +20,6 @@ pipeline {
                 sh '''
                     aws --version
                 '''
-                }
             }
         }
 
