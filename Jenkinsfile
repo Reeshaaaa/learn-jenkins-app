@@ -14,6 +14,7 @@ pipeline {
                     image 'amazon/aws-cli'
                     args "--entrypoint=''"
                 }
+            }
 
             steps {
                 sh '''
