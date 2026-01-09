@@ -1,12 +1,12 @@
 pipeline {
     agent any
-/*   
+   
     environment {
         NETLIFY_SITE_ID = '2f1874a3-4616-4c9e-891e-d65fe691b4c1'
         NETLIFY_AUTH_TOKEN = credentials('netlify-token')
         REACT_APP_VERSION = "1.0.$BUILD_ID"
     }
-*/
+
     stages {
         stage('AWS') {
             agent {
@@ -16,13 +16,17 @@ pipeline {
                 }
             }
 
+            environment {
+                AWS_S3_BUCKET = 'learn-jenkins-202501050108'
+            }
+
             steps {
                 withCredentials([usernamePassword(credentialsId: 's3-key', passwordVariable: 'AWS_SECRET_ACCESS_KEY', usernameVariable: 'AWS_ACCESS_KEY_ID')]) {
                     sh '''
                         aws --version
                         echo "Hello, AWS S3!" > index.html
-                        aws s3 cp index.html s3://learn-jenkins-202501050108/index.html
-                        aws s3 ls s3://learn-jenkins-202501050108/
+                        aws s3 cp index.html s3://$AWS_S3_BUCKET/index.html
+                        aws s3 ls s3://$AWS_S3_BUCKET/
                     '''
                 }
             }
